@@ -3,7 +3,7 @@
 import FormikInput from "@/components/shared/FormikInput";
 import { getAllUsernames } from "@/services/ClientService";
 import { Autocomplete, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Stack, TextField } from "@mui/material";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { array, object, string } from "yup";
@@ -26,7 +26,9 @@ export default function CreateProject() {
         <Dialog open={true} onClose={() => router.back()} fullScreen>
             <Formik
                 initialValues={{
-
+                    title: "",
+                    description: "",
+                    members: []
                 }}
                 onSubmit={(values) => {
 
@@ -34,11 +36,10 @@ export default function CreateProject() {
                 validationSchema={object({
                     title: string().required("title is required."),
                     description: string().required("description is required."),
-                    member: array().max(3, "You cannot have more than 3 members.")
+                    members: array().max(10, "Your project cannot have more than 10 members.")
                 })}
             >
-                {({ handleBlur, handleChange, errors, touched }) => (
-
+                {({ handleBlur, errors, touched, setFieldValue }) => (
                     <>
                         <DialogTitle>Create Project</DialogTitle>
                         <Divider />
@@ -52,17 +53,21 @@ export default function CreateProject() {
                                     <Autocomplete
                                         options={usernames}
                                         multiple
+                                        noOptionsText="No user found"
+                                        onChange={(e, value) => {
+                                            setFieldValue("members", value)
+                                        }}
                                         renderInput={(params) => (
                                             <TextField
+                                                {...params}
                                                 label={"Members"}
                                                 name="members"
-                                                onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                {...params}
+                                                error={(errors.members && Boolean(touched.members)) as boolean}
+                                                helperText={<ErrorMessage name="members" />}
                                             />
                                         )}
                                     >
-
                                     </Autocomplete>
                                 </Stack>
                             </Form>
