@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import AppContextProvider from "@/components/AppContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <nav>
           <Link href={"/"}>Home</Link>
           <Link href={"/about"}>About</Link>
         </nav>
+
+        <AppContextProvider>
+          {children}
+        </AppContextProvider>
       </body>
-      <body className={inter.className}>{children}</body>
     </html>
   );
 }
