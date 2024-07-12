@@ -1,7 +1,9 @@
 import ProjectView from "@/components/project/project-view"
 import { Container, Stack } from "@mui/material"
 
-export default function TrendPage() {
+export default async function TrendPage() {
+
+    //const projects = (await getTrendingProjects())
 
     const testData = [
         {
@@ -22,15 +24,29 @@ export default function TrendPage() {
             description: "cool description",
             date: "01/05/2024"
         },
+        {
+            id: 4,
+            title: "cool mania",
+            description: "cool description",
+            date: "01/05/2024"
+        },
+        {
+            id: 5,
+            title: "cool mania",
+            description: "cool description",
+            date: "01/05/2024"
+        },
     ]
     
     return (
         <Container >
-            <Stack gap={5}>
+            <Stack gap={3}>
                 <h1> Trending project ideas ! </h1>
                 {
-                    testData.map(data => 
-                        <ProjectView {...data} />
+                    testData.map((data, index) => 
+                        <ProjectView 
+                            key={index} {...data} 
+                        />
                     )
                 }
             </Stack>
