@@ -1,12 +1,17 @@
+'use client';
+
 import { ProjectViewDto } from "@/models/ProjectViewDto";
 import { Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useRouter } from "next/navigation";
 
 export default function ProjectView(project :  ProjectViewDto) {
 
+    const router = useRouter();
+
     return (
         <Card variant="outlined">
-            <CardActionArea>
+            <CardActionArea onClick={() => router.push(`/projects/${project.id}`)}>
                 <CardHeader
                     avatar={
                         <Avatar>
