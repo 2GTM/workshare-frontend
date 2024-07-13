@@ -1,7 +1,7 @@
 'use client';
 
 import { ProjectViewDto } from "@/models/ProjectViewDto";
-import { Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Typography } from "@mui/material";
+import { Avatar, AvatarGroup, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useRouter } from "next/navigation";
 
@@ -25,6 +25,13 @@ export default function ProjectView(project :  ProjectViewDto) {
                     <Typography variant="body2">
                         {project.description}
                     </Typography>
+                    <AvatarGroup total={project.membersUsername.length} max={3}>a
+                        {
+                            project.membersUsername.map((name) => 
+                                <Avatar>{name.at(0)}</Avatar>
+                            )
+                        }
+                    </AvatarGroup>
                 </CardContent>
             </CardActionArea>
             <CardActions>
