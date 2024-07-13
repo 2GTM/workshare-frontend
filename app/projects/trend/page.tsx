@@ -9,7 +9,7 @@ export default async function TrendPage() {
 
     return (
         <Container>
-            <Typography fontSize={30}>Top 5 of the most liked ideas ! </Typography>
+            <Typography variant="h4">Top 5 of the most liked ideas ! </Typography>
             <Suspense fallback={<p>Loading projects...</p>}>
                 <ProjectSection projects={trends} />
             </Suspense>
