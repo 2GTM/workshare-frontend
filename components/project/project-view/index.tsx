@@ -1,13 +1,13 @@
 'use client';
 
 import { ProjectViewDto } from "@/models/ProjectViewDto";
-import { Avatar, AvatarGroup, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Typography } from "@mui/material";
+import { Avatar, AvatarGroup, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Chip, Stack, Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function ProjectView(project :  ProjectViewDto) {
+export default function ProjectView(project: ProjectViewDto) {
 
     const router = useRouter();
     const [voted, setVoted] = useState(false);
@@ -28,23 +28,28 @@ export default function ProjectView(project :  ProjectViewDto) {
                         </Avatar>
                     }
                     title={<Typography fontSize={20}>{project.title}</Typography>}
-                    subheader={project.publisherName} 
+                    subheader={project.publisherName}
                 />
-                <CardContent>
-                    <Typography variant="body2">
-                        {project.description}
-                    </Typography>
-                    <AvatarGroup total={project.membersUsername.length} max={3}>a
-                        {
-                            project.membersUsername.map((name, index) => 
-                                <Avatar key={index}>{name.at(0)}</Avatar>
-                            )
-                        }
+
+                <CardContent component={Stack} spacing={1.5}>
+                    <Typography variant="body2">{project.description}</Typography>
+
+                    <Stack direction="row">
+                        {project.tagsContent?.map(tag => (
+                            <Chip label={tag} />
+                        ))}
+                    </Stack>
+
+                    <AvatarGroup total={project.membersUsername.length} max={3}>
+                        {project.membersUsername.map((name, index) =>
+                            <Avatar key={index}>{name.at(0)}</Avatar>
+                        )}
                     </AvatarGroup>
                 </CardContent>
             </CardActionArea>
+
             <CardActions>
-                <Button onClick={() => handleVote()} endIcon={ (voted) ? <FavoriteIcon/> : <FavoriteBorderIcon/>} sx={{m: "10px"}} >Like</Button>
+                <Button onClick={() => handleVote()} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />} sx={{ m: "10px" }} >Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>
         </Card>
