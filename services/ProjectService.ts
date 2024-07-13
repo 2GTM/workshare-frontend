@@ -26,3 +26,7 @@ export const searchProjects = (content: string, tags: string[]) => {
 export const addMemberProject  = (projectId : number, clientName : string) => {
     return http.post(`${REQUEST_MAPPING}/${projectId}/addMember`, undefined, {params : {clientName}})
 }
+
+export const voteProject = (projectId : number, clientName : string) => {
+    return http.post(`${REQUEST_MAPPING}/${projectId}/vote`, undefined, {params : {clientName}})
+}

@@ -6,7 +6,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { addMemberProject } from "@/services/ProjectService";
+import { addMemberProject, voteProject } from "@/services/ProjectService";
 import config from "@/config.json";
 
 
@@ -14,15 +14,16 @@ export default function ProjectView(project: ProjectViewDto) {
 
     const router = useRouter();
     const [voted, setVoted] = useState(false);
+    const userName = config.publisherName;
 
-    const handleVote = () => {
+    const handleVote = async () => {
         setVoted(!voted);
-        // ADD THE CHANGE TO DB
+        voteProject(project.id, userName);
         (!voted) ? project.voteCount++ : project.voteCount--;
     }
 
-    const handleCollab = async () => {
-        if(project.publisherName !== config.publisherName) addMemberProject(project.id, config.publisherName); 
+    const handleCollab = () => {
+        if(project.publisherName !== config.publisherName) addMemberProject(project.id, userName); 
         router.refresh();
     }
 
