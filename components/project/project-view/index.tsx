@@ -27,8 +27,8 @@ export default function ProjectView(project :  ProjectViewDto) {
                     </Typography>
                     <AvatarGroup total={project.membersUsername.length} max={3}>a
                         {
-                            project.membersUsername.map((name) => 
-                                <Avatar>{name.at(0)}</Avatar>
+                            project.membersUsername.map((name, index) => 
+                                <Avatar key={index}>{name.at(0)}</Avatar>
                             )
                         }
                     </AvatarGroup>
