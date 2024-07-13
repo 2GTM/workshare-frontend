@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { addMemberProject, voteProject } from "@/services/ProjectService";
 import config from "@/config.json";
+import TagChips from "@/components/shared/TagChips";
 
 
 export default function ProjectView(project: ProjectViewDto) {
@@ -43,11 +44,7 @@ export default function ProjectView(project: ProjectViewDto) {
                 <CardContent component={Stack} spacing={1.5}>
                     <Typography variant="body2">{project.description}</Typography>
 
-                    <Stack direction="row" flexWrap="wrap" spacing={1} useFlexGap>
-                        {project.tagsContent?.map(tag => (
-                            <Chip label={tag} key={tag} />
-                        ))}
-                    </Stack>
+                    <TagChips tags={project.tagsContent}/>
 
                     <AvatarGroup total={project.membersUsername.length} max={3}>
                         {project.membersUsername.map((name, index) =>
