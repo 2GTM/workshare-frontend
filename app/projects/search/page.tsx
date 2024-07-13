@@ -16,7 +16,7 @@ export default async function SearchProjects({ searchParams }: SearchProjectsPro
     const projects = (await searchProjects(searchParams.content, searchParams.tags)).data
 
     return (
-        <Container component={Stack} spacing={6}>
+        <Stack spacing={6} margin={5}>
             <ProjectsFilters />
 
             <ProjectSection
@@ -28,6 +28,6 @@ export default async function SearchProjects({ searchParams }: SearchProjectsPro
                 }
                 projects={projects}
             />
-        </Container>
+        </Stack>
     )
 }

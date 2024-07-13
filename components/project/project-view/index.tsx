@@ -1,7 +1,7 @@
 'use client';
 
 import { ProjectViewDto } from "@/models/ProjectViewDto";
-import { Avatar, AvatarGroup, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Chip, Stack, Typography } from "@mui/material";
+import { Avatar, AvatarGroup, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useRouter } from "next/navigation";
@@ -22,12 +22,12 @@ export default function ProjectView(project: ProjectViewDto) {
     }
 
     const handleCollab = async () => {
-        if(project.publisherName !== config.publisherName) addMemberProject(project.id, config.publisherName); 
+        if (project.publisherName !== config.publisherName) addMemberProject(project.id, config.publisherName);
         router.refresh();
     }
 
     return (
-        <Card variant="outlined">
+        <Card sx={{ width: "500px" }} variant="outlined">
             <CardActionArea onClick={() => router.push(`/projects/${project.id}`)}>
                 <CardHeader
                     avatar={
@@ -42,7 +42,7 @@ export default function ProjectView(project: ProjectViewDto) {
                 <CardContent component={Stack} spacing={1.5}>
                     <Typography variant="body2">{project.description}</Typography>
 
-                    <Stack direction="row">
+                    <Stack direction="row" flexWrap="wrap" spacing={1} useFlexGap>
                         {project.tagsContent?.map(tag => (
                             <Chip label={tag} key={tag} />
                         ))}

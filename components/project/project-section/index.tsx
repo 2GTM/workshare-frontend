@@ -1,5 +1,5 @@
 import { ProjectViewDto } from "@/models/ProjectViewDto";
-import { Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import ProjectView from "../project-view";
 import { ReactNode, Suspense } from "react";
 
@@ -9,7 +9,7 @@ export default function ProjectSection(props: { title: ReactNode, projects: Proj
             {props.title}
 
             <Suspense fallback={<p>Loading projects...</p>}>
-                <Stack spacing={1.75} useFlexGap>
+                <Grid flexWrap="wrap"container gap={2} alignItems="stretch">
                     {
                         props.projects?.map((project, index) =>
                             <ProjectView
@@ -17,7 +17,7 @@ export default function ProjectSection(props: { title: ReactNode, projects: Proj
                             />
                         )
                     }
-                </Stack>
+                </Grid>
             </Suspense>
         </Stack>
     );
