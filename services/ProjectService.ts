@@ -22,3 +22,7 @@ export const updateProject = (projectViewDto: ProjectViewDto) => {
 export const searchProjects = (content: string, tags: string[]) => {
     return http.get(`${REQUEST_MAPPING}/search`, {params : {content, tags}, paramsSerializer : {indexes : null}});
 }
+
+export const addMemberProject  = (projectId : number, clientName : string) => {
+    return http.post(`${REQUEST_MAPPING}/${projectId}/addMember`, undefined, {params : {clientName}})
+}

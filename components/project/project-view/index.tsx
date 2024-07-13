@@ -6,16 +6,24 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { addMemberProject } from "@/services/ProjectService";
+import config from "@/config.json";
+
 
 export default function ProjectView(project: ProjectViewDto) {
 
     const router = useRouter();
+    
     const [voted, setVoted] = useState(false);
 
     const handleVote = () => {
         setVoted(!voted);
         // ADD THE CHANGE TO DB
-        !voted ? project.voteCount++ : project.voteCount--;
+        (!voted) ? project.voteCount++ : project.voteCount--;
+    }
+
+    const handleCollab = async () => {
+        if(project.publisherName !== config.publisherName) addMemberProject(project.id, config.publisherName); 
     }
 
     return (
@@ -49,7 +57,7 @@ export default function ProjectView(project: ProjectViewDto) {
             </CardActionArea>
 
             <CardActions>
-                <Button>Collaborate</Button>
+                <Button onClick={() => handleCollab()}>Collaborate</Button>
                 <Button onClick={() => handleVote()} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />} sx={{ m: "10px" }} >Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>
