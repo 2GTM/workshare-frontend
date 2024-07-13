@@ -17,6 +17,11 @@ export default function AppContextProvider(props: { children: any }) {
                 defaultProps: {
                     variant: "contained"
                 }
+            },
+            MuiLink : {
+                defaultProps : {
+                    underline : "hover"
+                }
             }
         }
     });

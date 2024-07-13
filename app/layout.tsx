@@ -1,34 +1,42 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
 import AppContextProvider from "@/components/AppContext";
+import { AppBar, Container, Stack, Toolbar, Link as MuiLink } from "@mui/material";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "WorkShare",
-  description: "Collaborate with ease",
+	title: "WorkShare",
+	description: "Collaborate with ease",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <nav>
-          <Link href={"/"}>Home</Link>
-          <Link href={"/about"}>About</Link>
-          <Link href={"/projects/trend"}>Trending</Link>
-        </nav>
+	return (
+		<html lang="en">
+			<body className={inter.className}>
+				<AppContextProvider>
 
-        <AppContextProvider>
-          {children}
-        </AppContextProvider>
-      </body>
-    </html>
-  );
+					<AppBar position="static" color="transparent">
+						<Container maxWidth={false}>
+							<Toolbar>
+								<Stack spacing={3} direction="row">
+									<MuiLink component={Link} href="/">Home</MuiLink>
+									<MuiLink component={Link} href="/about">About</MuiLink>
+									<MuiLink component={Link} href="/projects/trend">Trending</MuiLink>
+								</Stack>
+							</Toolbar>
+						</Container>
+					</AppBar>
+
+					{children}
+				</AppContextProvider>
+			</body>
+		</html>
+	);
 }
