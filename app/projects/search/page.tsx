@@ -1,3 +1,4 @@
+import CreateUpdateDialog from "@/components/project/create-update-dialog"
 import ProjectSection from "@/components/project/project-section"
 import { searchProjects } from "@/services/ProjectService"
 import { Container, Typography } from "@mui/material"
@@ -8,6 +9,8 @@ export default async function SearchProjects() {
 
     return (
         <Container>
+            <CreateUpdateDialog />
+            
             <Typography variant="h4">Search Projects</Typography>
             <Suspense fallback={<p>Loading projects...</p>}>
                 <ProjectSection projects={projects} />

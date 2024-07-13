@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { array, object, string } from "yup";
 import { publisherName } from "@/config.json";
 
-export default function CreateProject() {
+export default function CreateUpdateDialog() {
     const router = useRouter();
     const [usernames, setUsernames] = useState<string[]>([]);
 
@@ -24,7 +24,6 @@ export default function CreateProject() {
             );
         }, []
     );
-
     console.log("RE RENDER");
 
     return (
