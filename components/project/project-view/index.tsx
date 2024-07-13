@@ -3,11 +3,14 @@
 import { ProjectViewDto } from "@/models/ProjectViewDto";
 import { Avatar, AvatarGroup, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function ProjectView(project :  ProjectViewDto) {
 
     const router = useRouter();
+    const [voted, setVoted] = useState(false);
 
     return (
         <Card variant="outlined">
@@ -35,7 +38,7 @@ export default function ProjectView(project :  ProjectViewDto) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button endIcon={<FavoriteIcon/>} sx={{m: "10px"}} >Like</Button>
+                <Button onClick={() => setVoted(!voted)} endIcon={ (voted) ? <FavoriteIcon/> : <FavoriteBorderIcon/>} sx={{m: "10px"}} >Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>
         </Card>
