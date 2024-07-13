@@ -1,7 +1,6 @@
 "use client";
 
 import FormikInput from "@/components/shared/FormikInput";
-import { ProjectViewDto } from "@/models/ProjectViewDto";
 import { getAllUsernames } from "@/services/ClientService";
 import { createProject } from "@/services/ProjectService";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,6 +9,7 @@ import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { array, object, string } from "yup";
+import { publisherName } from "@/config.json";
 
 export default function CreateProject() {
     const router = useRouter();
@@ -37,11 +37,19 @@ export default function CreateProject() {
                     linksContent: new Array<{ content: string, visibility: number }>()
                 }}
                 onSubmit={async (values) => {
+                    (values as any)["publisherName"] = publisherName;
                     (await createProject(values as any)).data
                 }}
                 validationSchema={object({
-                    title: string().required("title is required."),
-                    description: string().required("description is required."),
+                    title: string()
+                        .required("title is required.")
+                        .min(5, "title should have at least 5 characters.")
+                        .max(30, "title should have at most 30 characters.")
+                        ,
+                    description: string()
+                        .required("description is required.")
+                        .min(10, "description should have at least 10 characters.")
+                        .max(50, "description should have at most of 50 characters."),
                     membersUsername: array().max(10, "Your project cannot have more than 10 members."),
                     linksContent: array().of(
                         object({
@@ -56,7 +64,7 @@ export default function CreateProject() {
                         <Divider />
 
                         <DialogContent>
-                            <Form>
+                            <Form id="project-save">
                                 <Stack spacing={3}>
                                     <Field name="title" component={FormikInput} label="Title" />
                                     <Field name="description" component={FormikInput} multiline label="Description" />
@@ -126,7 +134,7 @@ export default function CreateProject() {
 
                         <DialogActions>
                             <Button variant="text">Cancel</Button>
-                            <Button form="">Update</Button>
+                            <Button type="submit" form="project-save">Update</Button>
                         </DialogActions>
                     </>
                 )}
