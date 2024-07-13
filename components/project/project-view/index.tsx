@@ -12,6 +12,11 @@ export default function ProjectView(project :  ProjectViewDto) {
     const router = useRouter();
     const [voted, setVoted] = useState(false);
 
+    const handleVote = () => {
+        setVoted(!voted);
+        !voted ? project.voteCount++ : project.voteCount--;
+    }
+
     return (
         <Card variant="outlined">
             <CardActionArea onClick={() => router.push(`/projects/${project.id}`)}>
@@ -38,7 +43,7 @@ export default function ProjectView(project :  ProjectViewDto) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button onClick={() => setVoted(!voted)} endIcon={ (voted) ? <FavoriteIcon/> : <FavoriteBorderIcon/>} sx={{m: "10px"}} >Like</Button>
+                <Button onClick={() => handleVote()} endIcon={ (voted) ? <FavoriteIcon/> : <FavoriteBorderIcon/>} sx={{m: "10px"}} >Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>
         </Card>
