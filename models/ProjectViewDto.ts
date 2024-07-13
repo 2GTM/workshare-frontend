@@ -7,4 +7,5 @@ export interface ProjectViewDto {
     publisherName: string;
     membersUsername: string[];
     linksContent: { content: string, visibility: number }[];
+    tagsContent: string[];
 }
