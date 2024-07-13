@@ -15,7 +15,7 @@ export default function ProjectsFilters() {
     const formik = useFormik({
         initialValues: {
             content: params.get("content") ?? [],
-            tags: params.getAll("tags") ?? ""
+            tags: params.getAll("tags") ?? []
         },
         onSubmit: (values) => {
             router.push(`?${stringify({ content: values.content, tags: values.tags }, { arrayFormat: "repeat" })}`);
@@ -24,6 +24,7 @@ export default function ProjectsFilters() {
 
     useEffect(
         () => {
+            console.log("UPDATED");
             formik.setValues({ tags: params.getAll("tags"), content: params.get("content") as any })
         }, [params]
     );
@@ -37,7 +38,10 @@ export default function ProjectsFilters() {
                     <Field name="content" component={FormikInput} label="Content" />
                     <Tags name="tags" />
 
-                    <Button type="submit">Submit</Button>
+                    <Stack direction="row" justifyContent="space-between">
+                        <Button onClick={() => router.push("?content=")}>Clear filters</Button>
+                        <Button type="submit">Apply filters</Button>
+                    </Stack>
                 </Stack>
             </Form>
         </FormikProvider>

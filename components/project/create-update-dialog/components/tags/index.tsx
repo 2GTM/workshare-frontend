@@ -10,7 +10,7 @@ export default function Tags(props: {name: string}) {
         <Autocomplete
             freeSolo
             options={[]}
-            value={formik.values.tagsContent}
+            value={formik.values[props.name]}
             multiple
             onChange={(_, value) => {
                 formik.setFieldValue(props.name, value)
