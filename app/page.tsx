@@ -1,12 +1,22 @@
-import { Button } from "@mui/material";
+import { getAllProjects } from "@/services/ProjectService";
+import { Box, Button, Grid } from "@mui/material";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+
+  const projects = (await getAllProjects()).data;
+  
   return (
     <main>
-      <div>
-        <Button>Click me</Button>
-      </div>
+        <Box sx={{flexGrow: 1, p: 2}}>
+          <Grid
+            container
+            spacing={2}
+            sx={{borderColor: 'divider'}}
+          >
+
+          </Grid>
+        </Box>
     </main>
   );
 }

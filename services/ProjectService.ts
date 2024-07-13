@@ -7,6 +7,10 @@ export const getTrendingProjects = () => {
     return http.get<ProjectViewDto[]>(`${REQUEST_MAPPING}/trend`);
 }
 
+export const getAllProjects = () => {
+    return http.get<ProjectViewDto[]>(`${REQUEST_MAPPING}`)
+}
+
 export const getProjectById = (projectId : number) => {
     return http.get<ProjectViewDto>(`${REQUEST_MAPPING}/${projectId}`);
 }

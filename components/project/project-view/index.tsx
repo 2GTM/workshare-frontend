@@ -14,6 +14,7 @@ export default function ProjectView(project :  ProjectViewDto) {
 
     const handleVote = () => {
         setVoted(!voted);
+        // ADD THE CHANGE TO DB
         !voted ? project.voteCount++ : project.voteCount--;
     }
 
