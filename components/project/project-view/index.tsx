@@ -13,7 +13,6 @@ import config from "@/config.json";
 export default function ProjectView(project: ProjectViewDto) {
 
     const router = useRouter();
-    
     const [voted, setVoted] = useState(false);
 
     const handleVote = () => {
