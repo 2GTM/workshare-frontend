@@ -49,6 +49,7 @@ export default function ProjectView(project: ProjectViewDto) {
             </CardActionArea>
 
             <CardActions>
+                <Button>Collaborate</Button>
                 <Button onClick={() => handleVote()} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />} sx={{ m: "10px" }} >Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>
