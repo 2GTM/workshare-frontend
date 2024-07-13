@@ -31,7 +31,8 @@ export function BaseCreateDialog(props: { closeAction?: any }) {
                 title: "",
                 description: "",
                 membersUsername: [],
-                linksContent: new Array<{ content: string, visibility: number }>()
+                linksContent: new Array<{ content: string, visibility: number }>(),
+                tagsContent: []
             }}
             onSubmit={async (values) => {
                 (values as any)["publisherName"] = config.publisherName;
@@ -54,7 +55,9 @@ export function BaseCreateDialog(props: { closeAction?: any }) {
                     object({
                         content: string().required("link cannot be empty.").url("link need to enter a valid url.")
                     })
-                )
+                ),
+                tagsContent :
+                    array()
             })}
         >
             {({ handleBlur, errors, touched, setFieldValue, values, handleChange }) => (
@@ -67,6 +70,27 @@ export function BaseCreateDialog(props: { closeAction?: any }) {
                             <Stack spacing={3}>
                                 <Field name="title" component={FormikInput} label="Title" />
                                 <Field name="description" component={FormikInput} multiline label="Description" />
+
+                                <Autocomplete
+                                    freeSolo
+                                    options={[]}
+                                    value={values.tagsContent}
+                                    multiple
+                                    onChange={(e, value) => {
+                                        setFieldValue("tagsContent", value)
+                                    }}
+                                    renderInput={(params) => (
+                                        <TextField
+                                            {...params}
+                                            label={"Tags"}
+                                            name="tagsContent"
+                                            onBlur={handleBlur}
+                                            error={(errors.tagsContent && Boolean(touched.tagsContent)) as boolean}
+                                            helperText={<ErrorMessage name="tagsContent" />}
+                                        />
+                                    )}
+                                >
+                                </Autocomplete>
 
                                 <Autocomplete
                                     defaultValue={[]}
