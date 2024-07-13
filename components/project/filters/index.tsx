@@ -6,6 +6,7 @@ import { Field, Form, FormikProvider, useFormik } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
 import { stringify } from "qs";
 import { useEffect } from "react";
+import Tags from "../create-update-dialog/components/tags";
 
 export default function ProjectsFilters() {
     const params = useSearchParams();
@@ -33,21 +34,8 @@ export default function ProjectsFilters() {
                 <Stack spacing={2}>
                     <Typography variant="h4">Search Filters</Typography>
 
-                    <Field name="content" component={FormikInput} />
-                    <Autocomplete
-                        freeSolo
-                        options={[]}
-                        onChange={(_, tags) => formik.setFieldValue("tags", tags)}
-                        multiple
-                        value={formik.values.tags}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label={"Tags"}
-                            />
-                        )}
-                    >
-                    </Autocomplete>
+                    <Field name="content" component={FormikInput} label="Content" />
+                    <Tags name="tags" />
 
                     <Button type="submit">Submit</Button>
                 </Stack>
