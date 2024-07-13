@@ -15,11 +15,11 @@ export default function ProjectView(project :  ProjectViewDto) {
                 <CardHeader
                     avatar={
                         <Avatar>
-                            {project.title.at(0)}
+                            {project.publisherName.at(0)}
                         </Avatar>
                     }
-                    title={project.title}
-                    subheader={project.date}
+                    title={<Typography fontSize={20}>{project.title}</Typography>}
+                    subheader={project.publisherName} 
                 />
                 <CardContent>
                     <Typography variant="body2">
@@ -29,7 +29,7 @@ export default function ProjectView(project :  ProjectViewDto) {
             </CardActionArea>
             <CardActions>
                 <Button endIcon={<FavoriteIcon/>} sx={{m: "10px"}} >Like</Button>
-                <Typography fontSize={20}>0</Typography>
+                <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>
         </Card>
     );

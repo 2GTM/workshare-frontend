@@ -3,6 +3,10 @@ import { ProjectViewDto } from "@/models/ProjectViewDto";
 
 const REQUEST_MAPPING = "/api/projects";
 
+export const getTrendingProjects = () => {
+    return http.get<ProjectViewDto[]>(`${REQUEST_MAPPING}/trend`);
+}
+
 export const createProject = (projectViewDto: ProjectViewDto) => {
     return http.post(REQUEST_MAPPING, projectViewDto);
 }
