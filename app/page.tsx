@@ -1,10 +1,9 @@
-import { getAllProjects } from "@/services/ProjectService";
 import { Box, Button, Grid } from "@mui/material";
 import Image from "next/image";
 
 export default async function Home() {
 
-  const projects = (await getAllProjects()).data;
+  //const projects = (await getAllProjects()).data;
   
   return (
     <main>
