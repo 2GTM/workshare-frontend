@@ -5,7 +5,8 @@ import { HTMLInputTypeAttribute } from "react";
 type FormikInputProps = {
     multiline?: boolean;
     type?: HTMLInputTypeAttribute;
-    label: string;
+    label?: string;
+    fullWidth?: boolean;
 }
 
 export default function FormikInput(props: FormikInputProps & FieldProps) {
@@ -14,6 +15,7 @@ export default function FormikInput(props: FormikInputProps & FieldProps) {
     return (
         <TextField
             {...props.field}
+            fullWidth={props.fullWidth}
             label={props.label}
             type={props.type}
             multiline={props.multiline}

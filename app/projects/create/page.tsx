@@ -2,11 +2,15 @@
 
 import FormikInput from "@/components/shared/FormikInput";
 import { getAllUsernames } from "@/services/ClientService";
-import { Autocomplete, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Stack, TextField } from "@mui/material";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { CheckBox } from "@mui/icons-material";
+import { Autocomplete, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControlLabel, IconButton, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { array, object, string } from "yup";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { randomUUID } from "crypto";
+import { nanoid } from "nanoid";
 
 export default function CreateProject() {
     const router = useRouter();
@@ -28,7 +32,8 @@ export default function CreateProject() {
                 initialValues={{
                     title: "",
                     description: "",
-                    members: []
+                    members: [],
+                    links: new Array<{ content: string, visibility: number }>()
                 }}
                 onSubmit={(values) => {
 
@@ -39,7 +44,7 @@ export default function CreateProject() {
                     members: array().max(10, "Your project cannot have more than 10 members.")
                 })}
             >
-                {({ handleBlur, errors, touched, setFieldValue }) => (
+                {({ handleBlur, errors, touched, setFieldValue, values, handleChange }) => (
                     <>
                         <DialogTitle>Create Project</DialogTitle>
                         <Divider />
@@ -69,6 +74,37 @@ export default function CreateProject() {
                                         )}
                                     >
                                     </Autocomplete>
+
+                                    <FieldArray
+                                        name="links"
+                                    >
+                                        {({ push, remove }) => (
+                                            <>
+                                                <Stack direction="row" spacing={1} alignItems="center">
+                                                    <Typography variant="subtitle1">Links</Typography>
+                                                    <Button onClick={() => push({ content: "", visibility: "PUBLIC" })}>Add link</Button>
+                                                </Stack>
+
+                                                {values.links.map((l, index) => (
+                                                    <Stack key={index} direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
+                                                        <IconButton onClick={() => remove(index)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+
+                                                        <Field name={`links[${index}].content`} component={FormikInput} fullWidth />
+
+                                                        <RadioGroup defaultValue={l.visibility}>
+                                                            <Stack direction="row">
+                                                                <FormControlLabel onChange={handleChange} name={`links[${index}].visibility`} value="PUBLIC" control={<Radio />} label="Public" />
+                                                                <FormControlLabel onChange={handleChange} name={`links[${index}].visibility`} value="MEMBERS" control={<Radio />} label="Members" />
+                                                                <FormControlLabel onChange={handleChange} name={`links[${index}].visibility`} value="PRIVATE" control={<Radio />} label="Private" />
+                                                            </Stack>
+                                                        </RadioGroup>
+                                                    </Stack>
+                                                ))}
+                                            </>
+                                        )}
+                                    </FieldArray>
                                 </Stack>
                             </Form>
                         </DialogContent>
