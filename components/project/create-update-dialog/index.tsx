@@ -175,7 +175,7 @@ export function CreateButtonAndDialog() {
             <Dialog
                 open={open}
                 onClose={() => setOpen(false)}
-                fullWidth
+                fullScreen
             >
                 <BaseCreateDialog closeAction={() => setOpen(false)} />
             </Dialog>

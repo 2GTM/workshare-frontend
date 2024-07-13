@@ -36,7 +36,7 @@ export default function ProjectView(project: ProjectViewDto) {
 
                     <Stack direction="row">
                         {project.tagsContent?.map(tag => (
-                            <Chip label={tag} />
+                            <Chip label={tag} key={tag} />
                         ))}
                     </Stack>
 

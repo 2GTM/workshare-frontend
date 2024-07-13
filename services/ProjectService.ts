@@ -19,6 +19,6 @@ export const updateProject = (projectViewDto: ProjectViewDto) => {
     return http.patch(`${REQUEST_MAPPING}/${projectViewDto.id}`,projectViewDto);
 }
 
-export const searchProjects = () => {
-    return http.get(`${REQUEST_MAPPING}/search`);
+export const searchProjects = (content: string, tags: string[]) => {
+    return http.get(`${REQUEST_MAPPING}/search`, {params : {content, tags}, paramsSerializer : {indexes : null}});
 }
