@@ -12,9 +12,9 @@ export const getProjectById = (projectId : number) => {
 }
 
 export const createProject = (projectViewDto: ProjectViewDto) => {
-    return http.post(REQUEST_MAPPING, undefined, { params: projectViewDto, paramsSerializer: { indexes: null } });
+    return http.post(REQUEST_MAPPING, projectViewDto);
 }
 
 export const updateProject = (projectViewDto: ProjectViewDto) => {
-    return http.patch(`${REQUEST_MAPPING}/${projectViewDto.id}`, undefined, { params: projectViewDto, paramsSerializer: { indexes: null } });
+    return http.patch(`${REQUEST_MAPPING}/${projectViewDto.id}`,projectViewDto);
 }
