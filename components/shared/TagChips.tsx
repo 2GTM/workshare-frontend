@@ -6,7 +6,7 @@ export default function TagChips(props : any) {
         <Stack direction="row">
             {
                 props.tags?.map((tag : string) => 
-                    <Chip label={tag}/>
+                    <Chip key={tag} label={tag}/>
                 )
             }
         </Stack>

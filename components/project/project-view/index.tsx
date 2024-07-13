@@ -10,7 +10,6 @@ import { addMemberProject, voteProject } from "@/services/ProjectService";
 import config from "@/config.json";
 import TagChips from "@/components/shared/TagChips";
 
-
 export default function ProjectView(project: ProjectViewDto) {
 
     const router = useRouter();
