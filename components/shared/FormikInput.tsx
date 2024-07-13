@@ -7,6 +7,9 @@ type FormikInputProps = {
     type?: HTMLInputTypeAttribute;
     label?: string;
     fullWidth?: boolean;
+
+    // For formik fieldValues
+    error?: boolean | undefined;
 }
 
 export default function FormikInput(props: FormikInputProps & FieldProps) {
@@ -20,7 +23,7 @@ export default function FormikInput(props: FormikInputProps & FieldProps) {
             type={props.type}
             multiline={props.multiline}
             rows={props.multiline ? 5 : undefined}
-            error={!!props.form.errors[name] && Boolean(props.form.touched[name])}
+            error={props.error ?? (!!props.form.errors[name] && Boolean(props.form.touched[name]))}
             helperText={<ErrorMessage name={name} />}
         />
     );

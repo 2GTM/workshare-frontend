@@ -2,15 +2,12 @@
 
 import FormikInput from "@/components/shared/FormikInput";
 import { getAllUsernames } from "@/services/ClientService";
-import { CheckBox } from "@mui/icons-material";
-import { Autocomplete, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControlLabel, IconButton, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Autocomplete, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControlLabel, IconButton, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { array, object, string } from "yup";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { randomUUID } from "crypto";
-import { nanoid } from "nanoid";
 
 export default function CreateProject() {
     const router = useRouter();
@@ -25,6 +22,8 @@ export default function CreateProject() {
             );
         }, []
     );
+
+    console.log("RE RENDER");
 
     return (
         <Dialog open={true} onClose={() => router.back()} fullScreen>
@@ -41,7 +40,12 @@ export default function CreateProject() {
                 validationSchema={object({
                     title: string().required("title is required."),
                     description: string().required("description is required."),
-                    members: array().max(10, "Your project cannot have more than 10 members.")
+                    members: array().max(10, "Your project cannot have more than 10 members."),
+                    links: array().of(
+                        object({
+                            content: string().required("link cannot be empty.").url("link need to enter a valid url.")
+                        })
+                    )
                 })}
             >
                 {({ handleBlur, errors, touched, setFieldValue, values, handleChange }) => (
@@ -51,11 +55,12 @@ export default function CreateProject() {
 
                         <DialogContent>
                             <Form>
-                                <Stack spacing={2}>
+                                <Stack spacing={3}>
                                     <Field name="title" component={FormikInput} label="Title" />
                                     <Field name="description" component={FormikInput} multiline label="Description" />
 
                                     <Autocomplete
+                                        defaultValue={[]}
                                         options={usernames}
                                         multiple
                                         noOptionsText="No user found"
@@ -79,30 +84,37 @@ export default function CreateProject() {
                                         name="links"
                                     >
                                         {({ push, remove }) => (
-                                            <>
+                                            <Stack>
                                                 <Stack direction="row" spacing={1} alignItems="center">
-                                                    <Typography variant="subtitle1">Links</Typography>
+                                                    <Typography variant="subtitle1">Links : </Typography>
                                                     <Button onClick={() => push({ content: "", visibility: "PUBLIC" })}>Add link</Button>
                                                 </Stack>
 
-                                                {values.links.map((l, index) => (
-                                                    <Stack key={index} direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
+                                                {values.links.map((link, index) => (
+                                                    <Stack key={index} direction="row" alignItems="center" spacing={1}>
                                                         <IconButton onClick={() => remove(index)}>
                                                             <DeleteIcon />
                                                         </IconButton>
 
-                                                        <Field name={`links[${index}].content`} component={FormikInput} fullWidth />
+                                                        <Field
+                                                            name={`links[${index}].content`}
+                                                            component={FormikInput}
+                                                            fullWidth
+                                                            error={!!errors.links?.[index] && Boolean(touched.links?.[index])}
+                                                        />
 
-                                                        <RadioGroup defaultValue={l.visibility}>
-                                                            <Stack direction="row">
-                                                                <FormControlLabel onChange={handleChange} name={`links[${index}].visibility`} value="PUBLIC" control={<Radio />} label="Public" />
-                                                                <FormControlLabel onChange={handleChange} name={`links[${index}].visibility`} value="MEMBERS" control={<Radio />} label="Members" />
-                                                                <FormControlLabel onChange={handleChange} name={`links[${index}].visibility`} value="PRIVATE" control={<Radio />} label="Private" />
-                                                            </Stack>
+                                                        <RadioGroup
+                                                            defaultValue={link.visibility}
+                                                            onChange={handleChange}
+                                                            name={`links[${index}].visibility`}
+                                                        >
+                                                            <FormControlLabel value="PUBLIC" control={<Radio />} label="Public" />
+                                                            <FormControlLabel value="MEMBERS" control={<Radio />} label="Members" />
+                                                            <FormControlLabel value="PRIVATE" control={<Radio />} label="Private" />
                                                         </RadioGroup>
                                                     </Stack>
                                                 ))}
-                                            </>
+                                            </Stack>
                                         )}
                                     </FieldArray>
                                 </Stack>
