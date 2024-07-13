@@ -23,6 +23,7 @@ export default function ProjectView(project: ProjectViewDto) {
 
     const handleCollab = async () => {
         if(project.publisherName !== config.publisherName) addMemberProject(project.id, config.publisherName); 
+        router.refresh();
     }
 
     return (
