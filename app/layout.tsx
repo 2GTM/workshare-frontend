@@ -21,19 +21,20 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={inter.className}>
 				<AppContextProvider>
-
 					<AppBar position="static" color="transparent">
 						<Container maxWidth={false}>
 							<Toolbar>
 								<Stack spacing={3} direction="row">
 									<MuiLink component={Link} href="/">Home</MuiLink>
 									<MuiLink component={Link} href="/about">About</MuiLink>
+									<MuiLink component={Link} href="/projects/search">Search Projects</MuiLink>
 									<MuiLink component={Link} href="/projects/trend">Trending</MuiLink>
 								</Stack>
 							</Toolbar>
 						</Container>
 					</AppBar>
-
+					<br /><br />
+					
 					{children}
 				</AppContextProvider>
 			</body>
