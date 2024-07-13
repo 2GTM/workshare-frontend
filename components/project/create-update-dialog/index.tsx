@@ -4,12 +4,17 @@ import FormikInput from "@/components/shared/FormikInput";
 import { getAllUsernames } from "@/services/ClientService";
 import { createProject } from "@/services/ProjectService";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Autocomplete, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControlLabel, IconButton, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import { Autocomplete, Avatar, Button, Chip, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControlLabel, IconButton, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { array, object, string } from "yup";
 import config from "@/config.json";
+import Tags from "./components/tags";
+import LabelIcon from "@/components/shared/LabelIcon";
+import PeopleIcon from '@mui/icons-material/People';
+import LinkIcon from '@mui/icons-material/Link';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 export function BaseCreateDialog(props: { closeAction?: any }) {
     const router = useRouter();
@@ -56,41 +61,24 @@ export function BaseCreateDialog(props: { closeAction?: any }) {
                         content: string().required("link cannot be empty.").url("link need to enter a valid url.")
                     })
                 ),
-                tagsContent :
+                tagsContent:
                     array()
             })}
         >
             {({ handleBlur, errors, touched, setFieldValue, values, handleChange }) => (
                 <>
-                    <DialogTitle>Create Project</DialogTitle>
+                    <DialogTitle variant="h4">Create Project</DialogTitle>
                     <Divider />
 
                     <DialogContent>
                         <Form id="project-save">
                             <Stack spacing={3}>
+                                <Typography variant="h5">Project informations</Typography>
+
                                 <Field name="title" component={FormikInput} label="Title" />
                                 <Field name="description" component={FormikInput} multiline label="Description" />
 
-                                <Autocomplete
-                                    freeSolo
-                                    options={[]}
-                                    value={values.tagsContent}
-                                    multiple
-                                    onChange={(e, value) => {
-                                        setFieldValue("tagsContent", value)
-                                    }}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label={"Tags"}
-                                            name="tagsContent"
-                                            onBlur={handleBlur}
-                                            error={(errors.tagsContent && Boolean(touched.tagsContent)) as boolean}
-                                            helperText={<ErrorMessage name="tagsContent" />}
-                                        />
-                                    )}
-                                >
-                                </Autocomplete>
+                                <Tags name="tagsContent" />
 
                                 <Autocomplete
                                     defaultValue={[]}
@@ -100,10 +88,15 @@ export function BaseCreateDialog(props: { closeAction?: any }) {
                                     onChange={(e, value) => {
                                         setFieldValue("membersUsername", value)
                                     }}
+                                    renderTags={(values, getTagProps) => (
+                                        values.map((member, index) => (
+                                            <Chip {...getTagProps({ index })} label={member} avatar={<Avatar>{member?.at(0)}</Avatar>} />
+                                        ))
+                                    )}
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}
-                                            label={"Members"}
+                                            label={<LabelIcon icon={<PeopleIcon />} label="Members" />}
                                             name="membersUsername"
                                             onBlur={handleBlur}
                                             error={(errors.membersUsername && Boolean(touched.membersUsername)) as boolean}
@@ -118,35 +111,43 @@ export function BaseCreateDialog(props: { closeAction?: any }) {
                                 >
                                     {({ push, remove }) => (
                                         <Stack>
-                                            <Stack direction="row" spacing={1} alignItems="center">
-                                                <Typography variant="subtitle1">Links : </Typography>
-                                                <Button onClick={() => push({ content: "", visibility: "PUBLIC" })}>Add link</Button>
+                                            <Stack direction="row" alignItems="center">
+                                                <Typography variant="h5">Links</Typography>
+
+                                                <IconButton onClick={() => push({ content: "", visibility: "PUBLIC" })}>
+                                                    <AddCircleIcon color="primary" fontSize="medium" />
+                                                </IconButton>
                                             </Stack>
 
-                                            {values.linksContent.map((link, index) => (
-                                                <Stack key={index} direction="row" alignItems="center" spacing={1}>
-                                                    <IconButton onClick={() => remove(index)}>
-                                                        <DeleteIcon />
-                                                    </IconButton>
+                                            {values.linksContent?.length == 0 ?
+                                                <p>Press the plus button to add links.</p> :
+                                                (
+                                                    values.linksContent.map((link, index) => (
+                                                        <Stack key={index} direction="row" alignItems="center" spacing={1}>
+                                                            <IconButton onClick={() => remove(index)}>
+                                                                <DeleteIcon />
+                                                            </IconButton>
 
-                                                    <Field
-                                                        name={`linksContent[${index}].content`}
-                                                        component={FormikInput}
-                                                        fullWidth
-                                                        error={!!errors.linksContent?.[index] && Boolean(touched.linksContent?.[index])}
-                                                    />
+                                                            <Field
+                                                                name={`linksContent[${index}].content`}
+                                                                component={FormikInput}
+                                                                fullWidth
+                                                                error={!!errors.linksContent?.[index] && Boolean(touched.linksContent?.[index])}
+                                                            />
 
-                                                    <RadioGroup
-                                                        defaultValue={link.visibility}
-                                                        onChange={handleChange}
-                                                        name={`linksContent[${index}].visibility`}
-                                                    >
-                                                        <FormControlLabel value="PUBLIC" control={<Radio />} label="Public" />
-                                                        <FormControlLabel value="MEMBERS" control={<Radio />} label="Members" />
-                                                        <FormControlLabel value="PRIVATE" control={<Radio />} label="Private" />
-                                                    </RadioGroup>
-                                                </Stack>
-                                            ))}
+                                                            <RadioGroup
+                                                                defaultValue={link.visibility}
+                                                                onChange={handleChange}
+                                                                name={`linksContent[${index}].visibility`}
+                                                            >
+                                                                <FormControlLabel value="PUBLIC" control={<Radio />} label="Public" />
+                                                                <FormControlLabel value="MEMBERS" control={<Radio />} label="Members" />
+                                                                <FormControlLabel value="PRIVATE" control={<Radio />} label="Private" />
+                                                            </RadioGroup>
+                                                        </Stack>
+                                                    ))
+                                                )
+                                            }
                                         </Stack>
                                     )}
                                 </FieldArray>
@@ -157,7 +158,7 @@ export function BaseCreateDialog(props: { closeAction?: any }) {
 
                     <DialogActions>
                         <Button variant="text" onClick={() => props.closeAction?.()}>Cancel</Button>
-                        <Button type="submit" form="project-save">Update</Button>
+                        <Button type="submit" form="project-save">Create</Button>
                     </DialogActions>
                 </>
             )}

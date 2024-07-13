@@ -6,6 +6,7 @@ import { Field, Form, FormikProvider, useFormik } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
 import { stringify } from "qs";
 import { useEffect } from "react";
+import Tags from "../create-update-dialog/components/tags";
 
 export default function ProjectsFilters() {
     const params = useSearchParams();
@@ -14,7 +15,7 @@ export default function ProjectsFilters() {
     const formik = useFormik({
         initialValues: {
             content: params.get("content") ?? [],
-            tags: params.getAll("tags") ?? ""
+            tags: params.getAll("tags") ?? []
         },
         onSubmit: (values) => {
             router.push(`?${stringify({ content: values.content, tags: values.tags }, { arrayFormat: "repeat" })}`);
@@ -23,6 +24,7 @@ export default function ProjectsFilters() {
 
     useEffect(
         () => {
+            console.log("UPDATED");
             formik.setValues({ tags: params.getAll("tags"), content: params.get("content") as any })
         }, [params]
     );
@@ -33,23 +35,13 @@ export default function ProjectsFilters() {
                 <Stack spacing={2}>
                     <Typography variant="h4">Search Filters</Typography>
 
-                    <Field name="content" component={FormikInput} />
-                    <Autocomplete
-                        freeSolo
-                        options={[]}
-                        onChange={(_, tags) => formik.setFieldValue("tags", tags)}
-                        multiple
-                        value={formik.values.tags}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label={"Tags"}
-                            />
-                        )}
-                    >
-                    </Autocomplete>
+                    <Field name="content" component={FormikInput} label="Content" />
+                    <Tags name="tags" />
 
-                    <Button type="submit">Submit</Button>
+                    <Stack direction="row" justifyContent="space-between">
+                        <Button onClick={() => router.push("?content=")}>Clear filters</Button>
+                        <Button type="submit">Apply filters</Button>
+                    </Stack>
                 </Stack>
             </Form>
         </FormikProvider>

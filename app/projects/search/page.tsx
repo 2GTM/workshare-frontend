@@ -16,17 +16,18 @@ export default async function SearchProjects({ searchParams }: SearchProjectsPro
     const projects = (await searchProjects(searchParams.content, searchParams.tags)).data
 
     return (
-        <Container component={Stack} spacing={2}>
+        <Stack spacing={6} margin={5}>
             <ProjectsFilters />
 
-            <Stack direction="row" justifyContent="space-between">
-                <Typography variant="h4">Search Projects</Typography>
-                <CreateButtonAndDialog />
-            </Stack>
-
-            <Suspense fallback={<p>Loading projects...</p>}>
-                <ProjectSection projects={projects} />
-            </Suspense>
-        </Container>
+            <ProjectSection
+                title={
+                    <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="h4">Search Projects</Typography>
+                        <CreateButtonAndDialog />
+                    </Stack>
+                }
+                projects={projects}
+            />
+        </Stack>
     )
 }
