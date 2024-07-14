@@ -24,8 +24,10 @@ export default function ProjectView(project: ProjectViewDto) {
     }
 
     const handleCollab = () => {
-        if(project.publisherName !== config.publisherName) addMemberProject(project.id, userName);
-        toast.success("You can start working on the project now !"); 
+        if(project.publisherName !== config.publisherName) {
+            addMemberProject(project.id, userName);
+            toast.success("You are now a collaborator on this project ! ");
+        }
         router.refresh();
     }
 
@@ -60,7 +62,7 @@ export default function ProjectView(project: ProjectViewDto) {
 
             <CardActions>
                 <Button onClick={handleCollab}>Collaborate</Button>
-                <Button onClick={() => handleVote()} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />} sx={{ m: "10px" }} >Like</Button>
+                <Button onClick={handleVote} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />}>Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>
         </Card>
