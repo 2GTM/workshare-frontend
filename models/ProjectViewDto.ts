@@ -6,6 +6,6 @@ export interface ProjectViewDto {
     date: string;
     publisherName: string;
     membersUsername: string[];
-    linksContent: { content: string, visibility: number }[];
+    linksContent: { content: string, visibility: string }[];
     tagsContent: string[];
 }
