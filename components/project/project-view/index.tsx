@@ -4,6 +4,7 @@ import { ProjectViewDto } from "@/models/ProjectViewDto";
 import { Avatar, AvatarGroup, Box, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { addMemberProject, removeMemberProject, voteProject } from "@/services/ProjectService";

@@ -16,6 +16,11 @@ export default async function ProjectPage({params} : any) {
                     <Typography fontWeight={700} variant="h1">{project.title}</Typography>
                     <Typography variant="h4" >{project.description}</Typography>
                 </Stack>
+                    <Typography color="orange" variant="h6"> 
+                        <MuiLink underline="none" href={`/clients/${project.publisherName}`}>
+                            {project.publisherName}
+                        </MuiLink>
+                    </Typography>
 
                 <Divider/>
 
