@@ -7,7 +7,7 @@ export default function NotFound() {
             <span style={{ fontSize: "200px", textAlign: "center"}}>
                 <TextTypeWriter text={"404"} />
             </span>
-            <Typography textAlign="center" variant="h2">You are not supposed to be there</Typography>
+            <Typography textAlign="center" variant="h2">Page not found</Typography>
         </Stack>
     )
 
