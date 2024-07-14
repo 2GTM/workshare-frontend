@@ -25,10 +25,10 @@ export default function RootLayout({
 					<AppBar position="static" color="transparent">
 						<Container maxWidth={false}>
 							<Toolbar>
-								<Stack spacing={3} direction="row">
-									<MuiLink component={Link} href="/">Home</MuiLink>
-									<MuiLink component={Link} href="/projects/search">Search Projects</MuiLink>
-									<MuiLink component={Link} href="/projects/trend">Trending</MuiLink>
+								<Stack fontSize={20} spacing={5} direction="row">
+									<MuiLink underline="none" component={Link} href="/">Home</MuiLink>
+									<MuiLink underline="none" component={Link} href="/projects/search">Find a project</MuiLink>
+									<MuiLink underline="none" component={Link} href="/projects/trend">Trending</MuiLink>
 								</Stack>
 							</Toolbar>
 						</Container>
