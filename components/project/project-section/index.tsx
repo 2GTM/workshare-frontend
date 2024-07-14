@@ -1,12 +1,14 @@
 import { ProjectViewDto } from "@/models/ProjectViewDto";
-import { Grid, Stack } from "@mui/material";
+import { Divider, Grid, Stack } from "@mui/material";
 import ProjectView from "../project-view";
 import { ReactNode, Suspense } from "react";
 
 export default function ProjectSection(props: { title: ReactNode, projects: ProjectViewDto[] }) {
     return (
-        <Stack spacing={1}>
+        <Stack gap={5}>
             {props.title}
+
+            <Divider/>
 
             <Suspense fallback={<p>Loading projects...</p>}>
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
