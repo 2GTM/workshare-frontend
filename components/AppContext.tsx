@@ -42,8 +42,9 @@ export default function AppContextProvider(props: { children: any }) {
             },
             MuiButton : {
                 defaultProps : {
-                    variant : "contained",
+                    variant : "outlined",
                     sx: {
+                        color: "white",
                         fontWeight: 700,
                         textTransform: "none",
                         boxShadow: "none",

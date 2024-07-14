@@ -1,10 +1,5 @@
-import ProjectView from "@/components/project/project-view";
+import { Container, Stack, Typography } from "@mui/material";
 import TextTypeWriter from "@/components/shared/TypeWriterText";
-import { getRandomProject } from "@/services/ProjectService";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import TypewriterComponent from "typewriter-effect";
 
 export default function Home() {
 
