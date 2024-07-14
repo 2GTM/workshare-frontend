@@ -5,13 +5,12 @@ import Box from '@mui/material/Box';
 
 export default async function ClientPage({ params }: any) {
 
-    // const client: ClientInfo = (await getClientInfo(params.username)).data;
-    console.log(params.username);
+    const client: ClientInfo = (await getClientInfo(params.username)).data;
 
     return (
         <>
             <Box
-                height={750}
+                height={1000}
                 width={500}
                 borderRadius={2}
                 sx={{ border: '2px solid grey' }}
@@ -23,10 +22,11 @@ export default async function ClientPage({ params }: any) {
                         height={350}
                         width={350}
                         margin={"auto"}
-                        sx={{ border: '2px solid grey' }}
                     >
                         <Avatar
-                        sx={{ width: 350, height: 350 }}>
+                        sx={{ width: 350, height: 350}}
+                        variant="rounded"
+                        >
 
                         </Avatar>
                     </Box>
