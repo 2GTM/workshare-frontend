@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { stringify } from "qs";
 import { useEffect } from "react";
 import Tags from "../create-update-dialog/components/tags";
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 export default function ProjectsFilters() {
     const params = useSearchParams();
@@ -33,7 +34,7 @@ export default function ProjectsFilters() {
         <FormikProvider value={formik}>
             <Form>
                 <Stack spacing={2}>
-                    <Typography variant="h2" fontWeight={700}>Search Filters</Typography>
+                    <Typography variant="h2" fontWeight={700}>Search Filters <AutoAwesomeIcon sx={{fontSize: 50}} /> </Typography>
 
                     <Field name="content" component={FormikInput} label="Content" />
                     <Tags name="tags" />

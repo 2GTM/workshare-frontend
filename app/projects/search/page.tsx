@@ -2,8 +2,7 @@ import { CreateButtonAndDialog } from "@/components/project/create-update-dialog
 import ProjectsFilters from "@/components/project/filters"
 import ProjectSection from "@/components/project/project-section"
 import { searchProjects } from "@/services/ProjectService"
-import { Container, Divider, Stack, Typography } from "@mui/material"
-import { Suspense } from "react"
+import { Divider, Stack, Typography } from "@mui/material"
 
 type SearchProjectsProps = {
     searchParams: {
@@ -23,7 +22,7 @@ export default async function SearchProjects({ searchParams }: SearchProjectsPro
                 title={
                     <>
                         <Stack direction="row" justifyContent="space-between">
-                            <Typography variant="h4">Search Results</Typography>
+                            <Typography variant="h4">Search Results </Typography>
                             <CreateButtonAndDialog />
                         </Stack>
                         <Divider />
