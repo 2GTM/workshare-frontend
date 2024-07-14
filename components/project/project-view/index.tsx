@@ -69,7 +69,7 @@ export default function ProjectView(project: ProjectViewDto) {
                         <Avatar key={index}>{name.at(0)}</Avatar>
                     )}
                 </AvatarGroup>
-                <Button onClick={handleCollab}>{(!isCollab) ? <Typography>Collaborate</Typography> : <Typography>Remove collaboration</Typography>}</Button>
+                <Button onClick={handleCollab}>{(!isCollab) ? <Typography>Collaborate</Typography> : <Typography>Remove collab</Typography>}</Button>
                 
                 <Button onClick={handleVote} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />}>Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
