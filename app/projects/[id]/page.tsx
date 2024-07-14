@@ -1,3 +1,4 @@
+import MemberView from "@/components/project/member-view";
 import { ProjectViewDto } from "@/models/ProjectViewDto";
 import { getProjectById } from "@/services/ProjectService";
 import { Box, Container, Divider, Stack, Typography } from "@mui/material";
@@ -15,12 +16,12 @@ export default async function ProjectPage({params} : any) {
                     <Typography variant="h4" >{project.description}</Typography>
                 </Stack>
                 <Divider/>
-                <Box border={2} borderRadius={2}  p={2}>
+                <Box>
                     <Typography fontSize={30}>Members</Typography>
                     <Stack direction={"row"} gap={2}>
                         {
                             project.membersUsername.map((name, index) => 
-                                <Link key={index} href={`/clients/${name}`}>{name}</Link>
+                                <MemberView key={index} name={name} />
                             )
                         }
                     </Stack>

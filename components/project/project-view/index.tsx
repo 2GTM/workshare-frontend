@@ -32,7 +32,7 @@ export default function ProjectView(project: ProjectViewDto) {
     }
 
     return (
-        <Card>
+        <Card sx={{minHeight: 320}}>
             <CardActionArea onClick={() => router.push(`/projects/${project.id}`)}>
                 <CardHeader
                     avatar={
