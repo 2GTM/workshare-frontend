@@ -32,7 +32,7 @@ export default function ProjectView(project: ProjectViewDto) {
     }
 
     return (
-        <Card variant="outlined">
+        <Card>
             <CardActionArea onClick={() => router.push(`/projects/${project.id}`)}>
                 <CardHeader
                     avatar={

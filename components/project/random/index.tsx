@@ -11,7 +11,7 @@ export default async function RandomProject(randomProject : ProjectViewDto) {
 
     return (
         <Container>
-            <Typography variant="h2">Here's a project we choose for you</Typography>
+            <Typography variant="h2">Why not begin with this project?</Typography>
             <ProjectView {...post}/>
         </Container>
     )

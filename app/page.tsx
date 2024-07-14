@@ -12,8 +12,8 @@ export default async function Home() {
   return (
     <main>
       <Container>
-        <Stack>
-          <Typography textAlign="center" variant="h1">WorkShare</Typography>
+        <Stack gap={2}>
+          <Typography  fontWeight={700} variant="h1">WorkShare</Typography>
 
           <RandomProject {...randomProject}/>
           
