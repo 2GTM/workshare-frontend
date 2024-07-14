@@ -68,7 +68,7 @@ export default function Auth(props: { isLogin?: boolean }) {
                 })}
             >
                 <Form>
-                    <Stack alignItems="center" justifyContent="center" flexWrap="wrap" direction="row" spacing={2} useFlexGap>
+                    <Stack sx={{ height : "80vh" }} alignItems="center" justifyContent="center" flexWrap="wrap" direction="row" spacing={2} useFlexGap>
                         <Stack width={450} spacing={2} useFlexGap flexWrap="wrap">
                             <Typography variant="h3">{props.isLogin ? "Login" : "Sign up"}</Typography>
                             <Typography variant="subtitle1">{props.isLogin ? "Welcome back! Nice to see you again!" : "The place where the dreams become projects."}</Typography>
@@ -77,8 +77,6 @@ export default function Auth(props: { isLogin?: boolean }) {
 
                             <Button type="submit">{props.isLogin ? "Sign in" : "Create account"}</Button>
                         </Stack>
-
-                        <Image alt="arduino" src={props.isLogin ? "/arduino.avif" : "/dream.webp"} width={600} height={600} priority />
                     </Stack>
                 </Form>
             </Formik>
