@@ -33,7 +33,7 @@ export default function RootLayout({
 							</Toolbar>
 						</Container>
 					</AppBar>
-					<br /><br />
+					
 					<Toaster
 						toastOptions={{
 							style: {
