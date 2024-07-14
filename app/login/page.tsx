@@ -19,8 +19,14 @@ export default function Login() {
                     console.log(values);
                 }}
                 validationSchema={object({
-                    username : string(),
+                    username : string()
+                        .required("username is required")
+                        .min(4, "username need to be at least 4 characters.")
+                        .max(30, "username need to be at most 30 characters."),
                     password : string()
+                        .required("password is required")
+                        .min(8, "password need to be at least 8 characters.")
+                        .max(100, "password need to be at most 100 characters.")
                 })}
             >
                 <Form>
