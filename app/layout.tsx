@@ -35,7 +35,15 @@ export default function RootLayout({
 						</Container>
 					</AppBar>
 					<br /><br />
-					<Toaster position="bottom-center" />
+					<Toaster
+						toastOptions={{
+							style: {
+								background: "#121212",
+								color: "white",
+								border: "1px solid #373737"
+							}
+						}} 
+						position="bottom-center" />
 					{children}
 				</AppContextProvider>
 			</body>
