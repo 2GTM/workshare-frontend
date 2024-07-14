@@ -22,7 +22,7 @@ export default async function SearchProjects({ searchParams }: SearchProjectsPro
             <ProjectSection
                 title={
                     <Stack direction="row" justifyContent="space-between">
-                        <Typography variant="h4">Search Projects</Typography>
+                        <Typography variant="h4">Search Results</Typography>
                         <CreateButtonAndDialog />
                     </Stack>
                 }

@@ -75,7 +75,7 @@ export default function AppContextProvider(props: { children: any }) {
                 defaultProps : {
                     variant: "outlined",
                     sx: {
-                        borderRadius: 4
+                        borderRadius: 2
                     }
                 }
             },

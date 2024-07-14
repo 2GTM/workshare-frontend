@@ -33,7 +33,7 @@ export default function ProjectsFilters() {
         <FormikProvider value={formik}>
             <Form>
                 <Stack spacing={2}>
-                    <Typography variant="h4">Search Filters</Typography>
+                    <Typography variant="h2" fontWeight={700}>Search Filters</Typography>
 
                     <Field name="content" component={FormikInput} label="Content" />
                     <Tags name="tags" />

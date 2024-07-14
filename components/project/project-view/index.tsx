@@ -43,7 +43,6 @@ export default function ProjectView(project: ProjectViewDto) {
                     title={<Typography fontSize={20}>{project.title}</Typography>}
                     subheader={project.publisherName}
                 />
-                
 
                 <CardContent component={Stack} spacing={1.5}>
                     
