@@ -15,9 +15,9 @@ export default async function ProjectPage({params} : any) {
                     <Typography variant="h4" >{project.description}</Typography>
                 </Stack>
                 <Divider/>
-                <Box border={1} borderRadius={2}  p={2}>
-                    <Typography>Members : {project.membersUsername.length}</Typography>
-                    <Stack direction={"row"}>
+                <Box border={2} borderRadius={2}  p={2}>
+                    <Typography fontSize={30}>Members</Typography>
+                    <Stack direction={"row"} gap={2}>
                         {
                             project.membersUsername.map((name, index) => 
                                 <Link key={index} href={`/clients/${name}`}>{name}</Link>

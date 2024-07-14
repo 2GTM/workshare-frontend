@@ -12,7 +12,7 @@ export default function AppContextProvider(props: { children: any }) {
             mode: prefersDarkMode ? "dark" : "light",
             primary: {
                 main: '#4951A5',
-                dark: '#d81b60',
+                dark: '#3bca1d',
                 light: '#000000'
             },
             secondary: {
@@ -84,6 +84,14 @@ export default function AppContextProvider(props: { children: any }) {
                             }
                         }
                     }
+                }
+            },
+            MuiAppBar : {
+                defaultProps : {
+                    sx: {
+                        fontSize: "12px"
+                    },
+                    elevation : 0,
                 }
             },
             MuiChip : {
