@@ -9,6 +9,7 @@ import { useState } from "react";
 import { addMemberProject, voteProject } from "@/services/ProjectService";
 import config from "@/config.json";
 import TagChips from "@/components/shared/TagChips";
+import toast from "react-hot-toast";
 
 export default function ProjectView(project: ProjectViewDto) {
 
@@ -23,12 +24,13 @@ export default function ProjectView(project: ProjectViewDto) {
     }
 
     const handleCollab = () => {
-        if(project.publisherName !== config.publisherName) addMemberProject(project.id, userName); 
+        if(project.publisherName !== config.publisherName) addMemberProject(project.id, userName);
+        toast.success("You can start working on the project now !"); 
         router.refresh();
     }
 
     return (
-        <Card sx={{ width: "500px" }} variant="outlined">
+        <Card variant="outlined">
             <CardActionArea onClick={() => router.push(`/projects/${project.id}`)}>
                 <CardHeader
                     avatar={
@@ -43,18 +45,21 @@ export default function ProjectView(project: ProjectViewDto) {
                 <CardContent component={Stack} spacing={1.5}>
                     <Typography variant="body2">{project.description}</Typography>
 
-                    <TagChips tags={project.tagsContent}/>
+                    <Stack direction="row" spacing={18}>
+                        <TagChips tags={project.tagsContent}/>
 
-                    <AvatarGroup total={project.membersUsername.length} max={3}>
-                        {project.membersUsername.map((name, index) =>
-                            <Avatar key={index}>{name.at(0)}</Avatar>
-                        )}
-                    </AvatarGroup>
+                        <AvatarGroup total={project.membersUsername.length} max={3}>
+                            {project.membersUsername.map((name, index) =>
+                                <Avatar key={index}>{name.at(0)}</Avatar>
+                            )}
+                        </AvatarGroup>
+                    </Stack>
+
                 </CardContent>
             </CardActionArea>
 
             <CardActions>
-                <Button onClick={() => handleCollab()}>Collaborate</Button>
+                <Button onClick={handleCollab}>Collaborate</Button>
                 <Button onClick={() => handleVote()} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />} sx={{ m: "10px" }} >Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>

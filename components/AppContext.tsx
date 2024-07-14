@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 export default function AppContextProvider(props: { children: any }) {
     const theme = createTheme({
         palette: {
-
+            
         },
         components: {
             MuiTextField: {
@@ -22,7 +22,11 @@ export default function AppContextProvider(props: { children: any }) {
                 defaultProps : {
                     underline : "hover"
                 }
-            }
+            },
+            MuiTypography : {
+                defaultProps : {
+                }
+            },
         }
     });
 

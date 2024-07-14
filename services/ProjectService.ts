@@ -11,6 +11,10 @@ export const getProjectById = (projectId : number) => {
     return http.get<ProjectViewDto>(`${REQUEST_MAPPING}/${projectId}`);
 }
 
+export const getRandomProject = () => {
+    return http.get<ProjectViewDto>(`${REQUEST_MAPPING}/random`);
+}
+
 export const createProject = (projectViewDto: ProjectViewDto) => {
     return http.post(REQUEST_MAPPING, projectViewDto);
 }

@@ -1,21 +1,24 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import ProjectView from "@/components/project/project-view";
+import RandomProject from "@/components/project/random";
+import { getRandomProject } from "@/services/ProjectService";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default async function Home() {
 
-  //const projects = (await getAllProjects()).data;
+  var randomProject = (await getRandomProject()).data;
   
   return (
     <main>
-        <Typography variant="h1">All hackathons</Typography>
-        <Box sx={{flexGrow: 1, p: 2}}>
-          <Grid
-            container
-            spacing={2}
-            sx={{borderColor: 'divider'}}
-          >
-          </Grid>
-        </Box>
+      <Container>
+        <Stack>
+          <Typography textAlign="center" variant="h1">WorkShare</Typography>
+
+          <RandomProject {...randomProject}/>
+          
+        </Stack>
+      </Container>
     </main>
   );
 }

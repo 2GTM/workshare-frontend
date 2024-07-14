@@ -4,6 +4,7 @@ import "./globals.css";
 import AppContextProvider from "@/components/AppContext";
 import { AppBar, Container, Stack, Toolbar, Link as MuiLink } from "@mui/material";
 import Link from "next/link";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +35,7 @@ export default function RootLayout({
 						</Container>
 					</AppBar>
 					<br /><br />
-					
+					<Toaster position="bottom-center" />
 					{children}
 				</AppContextProvider>
 			</body>
