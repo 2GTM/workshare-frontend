@@ -1,6 +1,9 @@
+import { ProjectViewDto } from "./ProjectViewDto";
+
 export default interface ClientInfo {
     username: string,
     bio: string,
     github:string,
-    projectsCount: number
+    linkedin:string,
+    projects: ProjectViewDto[]
 }

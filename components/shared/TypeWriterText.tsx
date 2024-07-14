@@ -9,7 +9,7 @@ export default function TextTypeWriter(props : any) {
                 {
                     strings: props.text.split(" "),
                     autoStart: true,
-                    loop: true,
+                    loop: true
                 }
             }
         />
