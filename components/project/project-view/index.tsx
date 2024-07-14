@@ -1,7 +1,7 @@
 'use client';
 
 import { ProjectViewDto } from "@/models/ProjectViewDto";
-import { Avatar, AvatarGroup, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Chip, Container, Grid, Stack, Typography } from "@mui/material";
+import { Avatar, AvatarGroup, Box, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ export default function ProjectView(project: ProjectViewDto) {
     }
 
     const handleCollab = () => {
-        if(project.publisherName !== config.publisherName) {
+        if (project.publisherName !== config.publisherName) {
             addMemberProject(project.id, userName);
             toast.success("You are now a collaborator on this project ! ");
         }
@@ -32,7 +32,7 @@ export default function ProjectView(project: ProjectViewDto) {
     }
 
     return (
-        <Card sx={{minHeight: 320}}>
+        <Card sx={{ minHeight: 285, display: "flex", flexDirection: "column"}}>
             <CardActionArea onClick={() => router.push(`/projects/${project.id}`)}>
                 <CardHeader
                     avatar={
@@ -45,27 +45,28 @@ export default function ProjectView(project: ProjectViewDto) {
                 />
 
                 <CardContent component={Stack} spacing={1.5}>
-                    
+
                     <Typography variant="body2">{project.description}</Typography>
 
                     <Stack direction="row" spacing={18}>
-                        <TagChips tags={project.tagsContent}/>
+                        <TagChips tags={project.tagsContent} />
                     </Stack>
                 </CardContent>
             </CardActionArea>
-
+            
+            <Container sx={{ marginTop: "auto"}}>
             <CardActions>
-                <AvatarGroup total={project.membersUsername.length} max={3}>
-                    {project.membersUsername.map((name, index) =>
-                        <Avatar key={index}>{name.at(0)}</Avatar>
-                    )}
-                </AvatarGroup>
-                <Button onClick={handleCollab}>Collaborate</Button>
-                
-                <Button onClick={handleVote} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />}>Like</Button>
-                <Typography fontSize={20}>{project.voteCount}</Typography>
+                    <AvatarGroup total={project.membersUsername.length} max={3}>
+                        {project.membersUsername.map((name, index) =>
+                            <Avatar key={index}>{name.at(0)}</Avatar>
+                        )}
+                    </AvatarGroup>
+                    <Button onClick={handleCollab}>Collaborate</Button>
 
+                    <Button onClick={handleVote} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />}>Like</Button>
+                    <Typography fontSize={20}>{project.voteCount}</Typography>
             </CardActions>
+            </Container>
         </Card>
     );
 }
