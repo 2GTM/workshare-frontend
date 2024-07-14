@@ -14,7 +14,7 @@ export default function ShareLink(props : any) {
     return (
         <> 
             { 
-                <Stack direction="row" gap={1}>
+                <Stack direction="row" gap={1} alignItems="center">
                     <Typography color="gray">{props.content}</Typography> 
                     <IconButton onClick={() => handleCopyClipboard(props.content)}> 
                         <ContentCopyIcon/>
