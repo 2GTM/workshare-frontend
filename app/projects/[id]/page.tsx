@@ -9,24 +9,23 @@ export default async function ProjectPage({params} : any) {
     
     return (
         <Container>
-
-            <Stack >
-                <Typography variant="h3">{project.title}</Typography>
-                <Typography variant="h5" >{project.description}</Typography>
-                <Divider/>
-            </Stack>
-            
-            <Box border={1} p={2}>
-                <Typography>Members</Typography>
-                
-                <Stack>
-                    {
-                        project.membersUsername.map((name, index) => 
-                            <Link key={index} href={`/clients/${name}`}>{name}</Link>
-                        )
-                    }
+            <Stack gap={3}>
+                <Stack >
+                    <Typography fontWeight={700} variant="h1">{project.title}</Typography>
+                    <Typography variant="h4" >{project.description}</Typography>
                 </Stack>
-            </Box>
+                <Divider/>
+                <Box border={1} borderRadius={2}  p={2}>
+                    <Typography>Members : {project.membersUsername.length}</Typography>
+                    <Stack direction={"row"}>
+                        {
+                            project.membersUsername.map((name, index) => 
+                                <Link key={index} href={`/clients/${name}`}>{name}</Link>
+                            )
+                        }
+                    </Stack>
+                </Box>
+            </Stack>
         </Container>
     );
 }

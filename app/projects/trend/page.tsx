@@ -9,7 +9,7 @@ export default async function TrendPage() {
     return (
         <Container>
             <ProjectSection 
-                title={<Typography variant="h4">Top 5 of the most liked ideas ! </Typography>} 
+                title={<Typography fontWeight={700} variant="h1">Top 5 of the most liked ideas ! </Typography>} 
                 projects={trends}
             />
         </Container>

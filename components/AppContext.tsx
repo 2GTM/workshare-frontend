@@ -1,10 +1,15 @@
 "use client";
 
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 
 export default function AppContextProvider(props: { children: any }) {
+
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
     const theme = createTheme({
+        
         palette: {
+            mode: prefersDarkMode ? "dark" : "light",
             primary: {
                 main: '#4951A5',
                 dark: '#d81b60',
@@ -106,6 +111,7 @@ export default function AppContextProvider(props: { children: any }) {
 
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline enableColorScheme />
             {props.children}
         </ThemeProvider>
     );

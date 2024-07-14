@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <main>
       <Container>
-        <Stack gap={2}>
+        <Stack alignItems="center" justifyContent="center"   height={"80vh"}  gap={2}>
           <Typography  fontWeight={700} variant="h1">WorkShare</Typography>
 
           <RandomProject {...randomProject}/>
