@@ -3,10 +3,10 @@ import { Chip, Stack } from "@mui/material";
 
 export default function TagChips(props : any) {
     return (
-        <Stack direction="row">
+        <Stack direction="row" gap={0.5}>
             {
                 props.tags?.map((tag : string) => 
-                    <Chip key={tag} label={tag}/>
+                    <Chip style={{borderRadius: "5px"}} variant="outlined" key={tag} label={tag}/>
                 )
             }
         </Stack>

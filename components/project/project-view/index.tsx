@@ -43,27 +43,29 @@ export default function ProjectView(project: ProjectViewDto) {
                     title={<Typography fontSize={20}>{project.title}</Typography>}
                     subheader={project.publisherName}
                 />
+                
 
                 <CardContent component={Stack} spacing={1.5}>
+                    
                     <Typography variant="body2">{project.description}</Typography>
 
                     <Stack direction="row" spacing={18}>
                         <TagChips tags={project.tagsContent}/>
-
-                        <AvatarGroup total={project.membersUsername.length} max={3}>
-                            {project.membersUsername.map((name, index) =>
-                                <Avatar key={index}>{name.at(0)}</Avatar>
-                            )}
-                        </AvatarGroup>
                     </Stack>
-
                 </CardContent>
             </CardActionArea>
 
             <CardActions>
+                <AvatarGroup total={project.membersUsername.length} max={3}>
+                    {project.membersUsername.map((name, index) =>
+                        <Avatar key={index}>{name.at(0)}</Avatar>
+                    )}
+                </AvatarGroup>
                 <Button onClick={handleCollab}>Collaborate</Button>
+                
                 <Button onClick={handleVote} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />}>Like</Button>
                 <Typography fontSize={20}>{project.voteCount}</Typography>
+
             </CardActions>
         </Card>
     );

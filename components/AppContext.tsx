@@ -1,5 +1,8 @@
 "use client";
 
+import "@fontsource/poppins";
+import "@fontsource/poppins/400.css"; 
+
 import { createTheme, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 
 export default function AppContextProvider(props: { children: any }) {
@@ -7,12 +10,16 @@ export default function AppContextProvider(props: { children: any }) {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
     const theme = createTheme({
-        
+        typography: {
+            fontFamily: [
+                'Poppins'
+            ].join(','),
+        },
         palette: {
             mode: prefersDarkMode ? "dark" : "light",
             primary: {
-                main: '#4951A5',
-                dark: '#3bca1d',
+                main: '#ffffff',
+                dark: '#008000',
                 light: '#000000'
             },
             secondary: {
