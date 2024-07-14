@@ -41,7 +41,7 @@ export default function ProjectView(project: ProjectViewDto) {
     }
 
     return (
-        <Card sx={{ minHeight: 285, display: "flex", flexDirection: "column"}}>
+        <Card sx={{ minHeight: 310, display: "flex", flexDirection: "column"}}>
             <CardActionArea onClick={() => router.push(`/projects/${project.id}`)}>
                 <CardHeader
                     avatar={
@@ -63,19 +63,19 @@ export default function ProjectView(project: ProjectViewDto) {
                 </CardContent>
             </CardActionArea>
             
-            <Container sx={{ marginTop: "auto"}}>
-            <CardActions>
-                <AvatarGroup total={project.membersUsername.length} max={3}>
-                    {project.membersUsername.map((name, index) =>
-                        <Avatar key={index}>{name.at(0)}</Avatar>
-                    )}
-                </AvatarGroup>
-                <Button onClick={handleCollab}>{(!isCollab) ? <Typography>Collaborate</Typography> : <Typography>Remove collab</Typography>}</Button>
-                
-                <Button onClick={handleVote} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />}>Like</Button>
-                <Typography fontSize={20}>{project.voteCount}</Typography>
+            <Container sx={{ margin: "auto"}}>
+                <CardActions>
+                    <AvatarGroup total={project.membersUsername.length} max={2}>
+                        {project.membersUsername.map((name, index) =>
+                            <Avatar key={index}>{name.at(0)}</Avatar>
+                        )}
+                    </AvatarGroup>
+                    <Button onClick={handleCollab}>{(!isCollab) ? <Typography>Collaborate</Typography> : <Typography>X Collab</Typography>}</Button>
+                    
+                    <Button onClick={handleVote} endIcon={(voted) ? <FavoriteIcon /> : <FavoriteBorderIcon />}>Like</Button>
+                    <Typography fontSize={20}>{project.voteCount}</Typography>
 
-            </CardActions>
+                </CardActions>
             </Container>
         </Card>
     );

@@ -10,7 +10,9 @@ import ProjectSection from "@/components/project/project-section";
 import { CreateButtonAndDialog } from "@/components/project/create-update-dialog";
 
 export default async function ClientPage({ params }: any) {
+
     const client: ClientInfo = (await getClientInfo(params.username)).data;
+
     console.log(client.projects);
     return (
         <>
@@ -20,22 +22,19 @@ export default async function ClientPage({ params }: any) {
                         position={"relative"}
                         height={1000}
                         width={500}
-                        borderRadius={2}
-                        sx={{ border: '2px solid grey' }}
                         margin={"auto"}
                         paddingTop={5}
                     >
                         <Box
-                            borderRadius={2}
                             height={350}
                             width={350}
                             margin={"auto"}
                         >
                             <Avatar
-                                sx={{ width: 350, height: 350 }}
+                                sx={{ width: 350, fontSize: 80, height: 350 }}
                                 variant="rounded"
                             >
-
+                                {client.username.at(0)}
                             </Avatar>
                         </Box>
                         <Box
@@ -56,8 +55,15 @@ export default async function ClientPage({ params }: any) {
                                 color={"#bbbbbb"}>
                                 {client.bio}
                             </Typography>
-                            <MuiLink component={Link} href={client.github}><GitHubIcon style={{fontSize: "50px"}} /></MuiLink>&nbsp;
-                                <MuiLink component={Link} href={client.linkedin}><LinkedInIcon style={{fontSize: "50px"}} /></MuiLink>
+
+                            <MuiLink href={client.github}>
+                                <GitHubIcon style={{fontSize: "50px"}} />
+                            </MuiLink>
+                            
+                            <MuiLink href={client.linkedin}>
+                                <LinkedInIcon style={{fontSize: "50px"}} />
+                            </MuiLink>
+
                             <Typography
                                 fontWeight={"bold"}
                                 marginTop={"auto"}
@@ -66,15 +72,12 @@ export default async function ClientPage({ params }: any) {
                                 marginLeft={8}
                                 marginBottom={2}
                             >
-                                IS WORKING ON {client.projects.length} PROJECT(S)
                             </Typography>
                         </Box>
                     </Box>
                     <Box
                         height={1000}
                         width={2000}
-                        borderRadius={2}
-                        sx={{ border: '2px solid grey' }}
                         padding={5}
                     >
                         <ProjectSection

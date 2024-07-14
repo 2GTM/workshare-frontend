@@ -3,12 +3,12 @@ import TextTypeWriter from "@/components/shared/TypeWriterText";
 
 export default function NotFound() {
     return (
-        <Container>
-            <span style={{ fontSize: "450px", textAlign: "center"}}>
+        <Stack alignItems="center" justifyContent="center" textAlign="center"  height={"80vh"}>
+            <span style={{ fontSize: "200px", textAlign: "center"}}>
                 <TextTypeWriter text={"404"} />
             </span>
             <Typography textAlign="center" variant="h2">You are not supposed to be there</Typography>
-        </Container>
+        </Stack>
     )
 
 }
