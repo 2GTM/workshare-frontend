@@ -17,7 +17,7 @@ export default async function ClientPage({ params }: any) {
     return (
         <>
             {client ?
-                <Grid container spacing={2}>
+            <Stack direction="row">
                     <Box
                         position={"relative"}
                         height={1000}
@@ -59,11 +59,10 @@ export default async function ClientPage({ params }: any) {
                             <MuiLink href={client.github}>
                                 <GitHubIcon style={{fontSize: "50px"}} />
                             </MuiLink>
-                            
                             <MuiLink href={client.linkedin}>
                                 <LinkedInIcon style={{fontSize: "50px"}} />
                             </MuiLink>
-
+                            
                             <Typography
                                 fontWeight={"bold"}
                                 marginTop={"auto"}
@@ -84,7 +83,7 @@ export default async function ClientPage({ params }: any) {
                             projects={client.projects}
                         ></ProjectSection>
                     </Box>
-                </Grid>
+                    </Stack>
                 :
                 <Typography
                     variant="h2"
