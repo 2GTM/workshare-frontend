@@ -4,7 +4,7 @@ import { createTheme, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/mat
 
 export default function AppContextProvider(props: { children: any }) {
 
-    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', {defaultMatches : true, noSsr : true});
 
     const theme = createTheme({
         

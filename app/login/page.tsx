@@ -4,6 +4,7 @@ import FormikInput from "@/components/shared/FormikInput";
 import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
+import { object, string } from "yup";
 
 export default function Login() {
     return (
@@ -17,6 +18,10 @@ export default function Login() {
                 onSubmit={(values) => {
                     console.log(values);
                 }}
+                validationSchema={object({
+                    username : string(),
+                    password : string()
+                })}
             >
                 <Form>
                     <Stack alignItems="center" justifyContent="center" flexWrap="wrap" direction="row" spacing={2} useFlexGap>
