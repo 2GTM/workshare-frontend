@@ -19,11 +19,11 @@ export default async function ProjectPage({params} : any) {
                 <Box>
                     <Typography fontSize={30}>Members</Typography>
                     <Stack direction={"row"} gap={2}>
-                        {
+                        {project.membersUsername.length !== 0 ?
                             project.membersUsername.map((name, index) => 
                                 <MemberView key={index} name={name} />
                             )
-                        }
+                         : <Typography>No members</Typography>}
                     </Stack>
                 </Box>
             </Stack>
