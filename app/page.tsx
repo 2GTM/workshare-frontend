@@ -1,7 +1,4 @@
-import ProjectView from "@/components/project/project-view";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Container, Stack, Typography } from "@mui/material";
 
 export default async function Home() {
 
