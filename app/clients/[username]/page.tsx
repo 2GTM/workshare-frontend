@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 export default async function ClientPage({ params }: any) {
 
-    // const client: ClientInfo = (await getClientInfo(params.username)).data;
+    const client: ClientInfo = (await getClientInfo(params.username)).data;
     console.log(params.username);
 
     return (
