@@ -15,6 +15,7 @@ import LabelIcon from "@/components/shared/LabelIcon";
 import PeopleIcon from '@mui/icons-material/People';
 import LinkIcon from '@mui/icons-material/Link';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Cookies from "js-cookie";
 
 export function BaseCreateDialog(props: { closeAction?: any }) {
     const router = useRouter();
@@ -41,7 +42,7 @@ export function BaseCreateDialog(props: { closeAction?: any }) {
             }}
             onSubmit={async (values) => {
                 (values as any)["publisherName"] = config.publisherName;
-                await createProject(values as any);
+                await createProject(values as any, Cookies.get("token")!);
                 props.closeAction?.();
                 router.refresh();
             }}

@@ -7,7 +7,6 @@ import { addMemberProject, removeMemberProject, voteProject } from "@/services/P
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Avatar, AvatarGroup, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, Container, Stack, Typography } from "@mui/material";
-import { orange } from "@mui/material/colors";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";

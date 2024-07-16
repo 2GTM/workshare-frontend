@@ -3,6 +3,7 @@ import ProjectsFilters from "@/components/project/filters"
 import ProjectSection from "@/components/project/project-section"
 import { searchProjects } from "@/services/ProjectService"
 import { Divider, Stack, Typography } from "@mui/material"
+import { cookies } from "next/headers";
 
 type SearchProjectsProps = {
     searchParams: {
@@ -13,6 +14,7 @@ type SearchProjectsProps = {
 
 export default async function SearchProjects({ searchParams }: SearchProjectsProps) {
     const projects = (await searchProjects(searchParams.content, searchParams.tags)).data
+    const store = cookies();
 
     return (
         <Stack spacing={6} margin={5}>
@@ -23,7 +25,7 @@ export default async function SearchProjects({ searchParams }: SearchProjectsPro
                     <>
                         <Stack direction="row" justifyContent="space-between">
                             <Typography variant="h4">Search Results </Typography>
-                            <CreateButtonAndDialog />
+                            {store.get("token")?.value ? <CreateButtonAndDialog /> : <></>}
                         </Stack>
                         <Divider />
                     </>

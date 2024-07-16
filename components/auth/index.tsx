@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { object, string } from "yup";
+import Cookies from "js-cookie";
 
 const USERNAME_EXISTS = "username already exists.";
 
@@ -25,10 +26,11 @@ export default function Auth(props: { isLogin?: boolean }) {
                     password: ""
                 }}
                 onSubmit={async (values, formikHelpers) => {
+                    
                     if (props.isLogin) {
                         await login(values.username, values.password)
                             .then(res => {
-                                localStorage.setItem("token", res.data.token);
+                                Cookies.set("token", res.data.token);
                                 router.push("/")
                             })
                             .catch((error: AxiosError) => {
@@ -45,8 +47,8 @@ export default function Auth(props: { isLogin?: boolean }) {
                             formikHelpers.setFieldError("username", USERNAME_EXISTS);
                             return;
                         }
-
-                        localStorage.setItem("token", (await signUp(values.username, values.password)).data.token);
+                        
+                        Cookies.set("token", (await signUp(values.username, values.password)).data.token)
                         router.push("/")
                     }
                 }}

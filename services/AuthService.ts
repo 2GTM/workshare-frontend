@@ -9,3 +9,7 @@ export function signUp(username: string, password: string) {
 export function login(username: string, password: string) {
     return http.post(`${REQUEST_MAPPING}/login`, undefined, { params: { username, password } });
 }
+
+export function validateToken(token: string) {
+    return http.post(`${REQUEST_MAPPING}/validate-token`, undefined, {params : {token}});
+}
