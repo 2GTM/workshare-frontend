@@ -35,7 +35,7 @@ export default function Auth(props: { isLogin?: boolean }) {
                             })
                             .catch((error: AxiosError) => {
                                 if (error.response?.status == 403) {
-                                    formikHelpers.resetForm({ errors: { username: "username or password does not exists." }, touched: { username: true } });
+                                    formikHelpers.resetForm({ errors: { username: "invalid username or password." }, touched: { username: true } });
                                 }
                             });
                     }

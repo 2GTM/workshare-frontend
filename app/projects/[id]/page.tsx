@@ -6,7 +6,6 @@ import { Box, Container, Divider, Stack, Typography } from "@mui/material";
 import { Link as MuiLink } from "@mui/material";
 
 export default async function ProjectPage({params} : any) {
-
     const project : ProjectViewDto = (await getProjectById(params.id)).data;
     
     return (
